@@ -16,7 +16,7 @@ Where $P_{i}$ is the proportion of cells where gene $i$ dropouts out, $S_{i}$ is
 
 \section*{Example Workflow}
 
-We'll be using a portion of the Deng et al. (2014) dataset in this example. You can download the R-package containing this data (M3DExampleData) from Bioconductor using biocLite().
+We'll be using a portion of the Deng et al. (2014) dataset in this example. You can download the R-package containing this data (M3DExampleData) from Bioconductor using BiocManager::install().
 <<results=hide>>=
 library(M3Drop)
 library(M3DExampleData)
