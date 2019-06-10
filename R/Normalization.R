@@ -27,7 +27,7 @@ bg__filter_cells <- function(expr_mat,labels=NA, suppress.plot=FALSE, min_detect
 		mu <- mean(cell_zero);
 		sigma <- sd(cell_zero);
 		# Deal with bi-modal
-		if (sum(cell_zero > mu-sigma & cell_zero < mu+sigma) < 0.5) { # should be 0.68 theoretically
+		if (sum(cell_zero > mu-sigma & cell_zero < mu+sigma)/length(cell_zero) < 0.5) { # should be 0.68 theoretically
 			mu <- mean(cell_zero[cell_zero < median(cell_zero)]);
 			sigma <- sd(cell_zero[cell_zero < median(cell_zero)]);
 		}

@@ -473,7 +473,6 @@ unfinished__nbGroupDE <- function(counts, fit, groups) {
 	return(output);
 }
 
-
 hidden_nbImputeZeros <- function(counts, fit) {
 	vals <- fit$vals
 	for (i in 1:nrow(counts)) {
@@ -537,9 +536,9 @@ NBumiConvertData <- function(input, is.log=FALSE, is.counts=FALSE, pseudocount=1
 		c <- which(names(input@assays) == "counts")
 		ln <- which(names(input@assays) == "logcounts")
 		if (length(c) > 0) {
-			counts <- input@assays[[c]]
+			counts <- assays(input)[[c]]
 		} else if (length(ln) > 0) {
-			lognorm <- input@assays[[ln]]
+			lognorm <- assays(input)[[ln]]
 		} else {
 			stop("Error: Recognized SingleCellExperiment object but cannot find either counts or lognorm expression.")
 		}
@@ -553,6 +552,9 @@ NBumiConvertData <- function(input, is.log=FALSE, is.counts=FALSE, pseudocount=1
 	} else if (type == "seurat") {
 		# Seurat
 		counts <- input@raw.data
+	} else if (type == "Seurat") {
+		# Seurat
+		counts <- input@assays$RNA
 	} else if (type == "matrix" | 
 		   type == "data.frame" | 
 		   type == "dgCMatrix" | 
