@@ -10,7 +10,7 @@
   M3DropConvertData(input, is.log=FALSE, is.counts=FALSE, pseudocount=1)
 }
 \arguments{
-  \item{input}{a matrix, data.frame or object }
+  \item{input}{ a matrix, data.frame or object }
   \item{is.log}{ has the data been log-transformed? (assumes log-base 2 with pseudocount of 1) }
   \item{is.counts}{ is the data raw unnormalized counts? (raw counts will be CPM normalized) }
   \item{pseudocount}{ pseudocount added before log-transformation }
@@ -19,21 +19,36 @@
 	You must have loaded the respective packages (in parentheses) into your namespace before running this function on the respective objects. Note that to maintain scalability sparse matrices will remain as such.
 
 	Supported classes/objects:
-		SCESet (scater <= 1.4.0) : uses "exprs" or if unavailable then "counts" 
-		SingleCellExperiment (scater >= 1.6.0) : uses "logcounts", which is assumed to be log-normalized, or if unavailable then "counts" 
-		CellDataSet (monocle) : uses "exprs", specify log/counts using arguments
-		ExpressionSet (Biobase) : uses "exprs", specify log/counts using arguments
-		seurat (Seurat) : uses "raw.data" as counts.
+		\describe{
+
+		\item{SCESet (scater <= 1.4.0)}{uses "exprs" or if unavailable then "counts"}
+
+		\item{SingleCellExperiment (scater >= 1.6.0)}{uses "normcounts" if available, then "logcounts", which is assumed to be log-normalized, then "counts"}
+
+		\item{CellDataSet (monocle)}{uses "exprs", specify log/counts using arguments}
+
+		\item{ExpressionSet (Biobase)}{uses "exprs", specify log/counts using arguments}
+
+		\item{seurat (Seurat)}{uses "raw.data" as counts.}
+		}
 
 		Matrix/Dataframe classes :
-		dgCMatrix (Matrix) : specify log/counts using arguments
-		data.table (data.table) : specify log/counts using arguments
-		DataTable (S4Vectors) : specify log/counts using arguments
-		DataFrame (S4Vectors): specify log/counts using arguments
-		AnnotatedDataFrame (Biobase) : specify log/counts using arguments
-		matrix (base-r) : specify log/counts using arguments
-		data.frame (base-r) : specify log/counts using arguments
 
+		\describe{
+		\item{dgCMatrix (Matrix)}{specify log/counts using arguments}
+
+		\item{data.table (data.table)}{specify log/counts using arguments}
+
+		\item{DataTable (S4Vectors)}{specify log/counts using arguments}
+
+		\item{DataFrame (S4Vectors)}{specify log/counts using arguments}
+
+		\item{AnnotatedDataFrame (Biobase)}{specify log/counts using arguments}
+
+		\item{matrix (base-r)}{specify log/counts using arguments}
+
+		\item{data.frame (base-r)}{specify log/counts using arguments}
+		}
 
 }
 \value{A normalized but not log-transformed matrix appropriate for input into M3Drop functions.}
