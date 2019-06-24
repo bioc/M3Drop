@@ -533,8 +533,8 @@ NBumiConvertData <- function(input, is.log=FALSE, is.counts=FALSE, pseudocount=1
 
 	} else if (type == "SingleCellExperiment") {
 		# New scater
-		c <- which(names(assays(input) == "counts")
-		ln <- which(names(assays(input) == "logcounts")
+		c <- which(names(assays(input) == "counts"))
+		ln <- which(names(assays(input) == "logcounts"))
 		if (length(c) > 0) {
 			counts <- assays(input)[[c]]
 		} else if (length(ln) > 0) {
