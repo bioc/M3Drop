@@ -59,7 +59,6 @@ M3DropConvertData <- function(input, is.log=FALSE, is.counts=FALSE, pseudocount=
 		   type == "data.frame" | 
 		   type == "dgCMatrix" | 
 		   type == "data.table" |
-		   type == "DataTable" |
 		   type == "DataFrame" |
 		   type == "AnnotatedDataFrame") {
 		if (type != "dgCMatrix") {

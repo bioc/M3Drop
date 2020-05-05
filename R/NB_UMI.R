@@ -559,7 +559,6 @@ NBumiConvertData <- function(input, is.log=FALSE, is.counts=FALSE, pseudocount=1
 		   type == "data.frame" | 
 		   type == "dgCMatrix" | 
 		   type == "data.table" |
-		   type == "DataTable" |
 		   type == "DataFrame" |
 		   type == "AnnotatedDataFrame") {
 		if (type != "dgCMatrix") {

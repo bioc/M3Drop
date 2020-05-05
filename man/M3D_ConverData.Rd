@@ -39,8 +39,6 @@
 
 		\item{data.table (data.table)}{specify log/counts using arguments}
 
-		\item{DataTable (S4Vectors)}{specify log/counts using arguments}
-
 		\item{DataFrame (S4Vectors)}{specify log/counts using arguments}
 
 		\item{AnnotatedDataFrame (Biobase)}{specify log/counts using arguments}
