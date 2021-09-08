@@ -25,11 +25,9 @@
 
 		\item{SingleCellExperiment (scater >= 1.6.0)}{uses "counts", if unavailable then "logcounts", which is assumed to be log-normalized.}
 
-		\item{CellDataSet (monocle)}{uses "exprs", specify log/counts using arguments}
-
-		\item{ExpressionSet (Biobase)}{uses "exprs", specify log/counts using arguments}
-
 		\item{seurat (Seurat)}{uses "raw.data" as counts.}
+
+		\item{Seurat (Seurat v3)}{uses "obj@assays$RNA@counts" as counts.}
 		}
 		Matrix/Dataframe classes :
 		\describe{
@@ -75,10 +73,5 @@
 	require("SingleCellExperiment")
 	SCE <- SingleCellExperiment(assays=list(counts=counts))
 	input_counts <- NBumiConvertData(SCE)
-
-	# monocle Object
-	require("monocle")
-	obj <- suppressWarnings(newCellDataSet(as.matrix(lognorm)))
-	input_counts <- NBumiConvertData(obj, is.log=TRUE)
 }
 \keyword{normalization}
