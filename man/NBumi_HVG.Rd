@@ -5,7 +5,7 @@
 	Tests for significantly high variability in droplet-based datasets.
 }
 \usage{
-	NBumiHVG(counts, fit, fdr_thresh=0.05, suppress.plot=FALSE, method=c("DANB", "basic"), bioVar=0.5)
+	NBumiHVG(counts, fit, fdr_thresh=0.05, suppress.plot=FALSE, method=c("DANB", "basic"))
 }
 \arguments{
   \item{counts}{raw count matrix (e.g. from NBumiConvertData).}
@@ -13,7 +13,6 @@
   \item{fdr_thresh}{multiple testing correction threshold to apply to filter output.}
   \item{suppress.plot}{whether to plot mean vs variance & selected features.}
   \item{method}{whether to use DANB dispersions or raw sample variances.}
-  \item{bioVar}{percent of variability due to biology.}
 }
 \details{
 	Assumes a constant dispersion parameter due to technical noise (see: [1]), which is

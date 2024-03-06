@@ -42,16 +42,21 @@ M3DropConvertData <- function(input, is.log=FALSE, is.counts=FALSE, pseudocount=
 		} else {
 			stop("Error: Recognized SingleCellExperiment object but cannot find either counts or lognorm expression.")
 		}
+	} else if (type == "CellDataSet" | type == "ExpressionSet") {
+		# monocle
+		if (is.log) {
+			lognorm <- Biobase::exprs(input)
+		} else {
+			counts <- Biobase::exprs(input)
+		}
 	} else if (type == "seurat") {
 		# Seurat
 		counts <- input@raw.data
-	} else if (type == "Seurat") {
-		# Seurat
-		counts <- input@assays$RNA@counts
 	} else if (type == "matrix" | 
 		   type == "data.frame" | 
 		   type == "dgCMatrix" | 
 		   type == "data.table" |
+		   type == "DataTable" |
 		   type == "DataFrame" |
 		   type == "AnnotatedDataFrame") {
 		if (type != "dgCMatrix") {
@@ -86,8 +91,7 @@ M3DropConvertData <- function(input, is.log=FALSE, is.counts=FALSE, pseudocount=
 }
 
 bg__calc_variables <- function(expr_mat) {
-    this_class <- unlist(class(expr_mat))[1]
-    if (this_class != "matrix" & this_class != "dgCMatrix" & this_class != "Matrix") {
+    if (class(expr_mat) != "matrix" & class(expr_mat) != "dgCMatrix" & class(expr_mat) != "Matrix") {
 	warning("Warning: not a recognized matrix class, coercing to 'matrix'.")
 	expr_mat <- as.matrix(expr_mat)
     }

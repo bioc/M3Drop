@@ -1,4 +1,4 @@
-NBumiHVG <- function(counts, fit, fdr_thresh=0.05, suppress.plot=FALSE, method=c("DANB", "basic"), bioVar=0.5) {
+NBumiHVG <- function(counts, fit, fdr_thresh=0.05, suppress.plot=FALSE, method=c("DANB", "basic")) {
 	# v of v : https://math.stackexchange.com/questions/72975/variance-of-sample-variance
 	# Moments of NB: http://mathworld.wolfram.com/NegativeBinomialDistribution.html
 
@@ -17,9 +17,7 @@ NBumiHVG <- function(counts, fit, fdr_thresh=0.05, suppress.plot=FALSE, method=c
 	# var = mu + disp * mu^2
 
 	tmp <- mu_obs^2
-	reg <- summary(glm((v_obs-mu_obs)~tmp+0))
-	disp <- reg$coefficients[1]+2*reg$coefficients[2]
-	#disp <- glm((v_obs-mu_obs)~tmp+0)$coef[1]
+	disp <- glm((v_obs-mu_obs)~tmp+0)$coef[1]
 	v_fitted <- mu_obs+disp*mu_obs^2
 
 	p <- mu_obs/v_fitted
@@ -29,12 +27,11 @@ NBumiHVG <- function(counts, fit, fdr_thresh=0.05, suppress.plot=FALSE, method=c
 	mu4 <- r*(1-p)*(6-6*p+p^2+3*r-3*p*r)/(p^4)
 	sigma2 <- r*(1-p)/(p^2)
 
-	#v_of_v <- mu4/n - (sigma2^2*(n-3)/(n*(n-1))) #https://math.stackexchange.com/questions/72975/variance-of-sample-variance
+	#v_of_v <- mu4/n - (sigma2^2*(n-3)/(n*(n-1)) #https://math.stackexchange.com/questions/72975/variance-of-sample-variance
 
 	v_of_v <- mu4*(n-1)^2/n^3 - (sigma2^2*(n-3)*(n-1))/(n^3) #http://mathworld.wolfram.com/SampleVarianceDistribution.html
 
-	# (v_obs - v_exp)/v_obs > bioVar
-	z <- (v_obs - (1/(1-bioVar))*sigma2)/sqrt(v_of_v)
+	z <- (v_obs - sigma2)/sqrt(v_of_v)
 	p <- pnorm(z, lower.tail=FALSE)
 	q <- p.adjust(p, method="fdr")
         eff <- v_obs-sigma2
@@ -48,7 +45,7 @@ NBumiHVG <- function(counts, fit, fdr_thresh=0.05, suppress.plot=FALSE, method=c
 		# Lines
 		reorder <- order(mu_obs)
 		lines(mu_obs[reorder], sigma2[reorder], col="grey80", lwd=2, lty=1)
-		lines(mu_obs[reorder], (1/(1-bioVar))*sigma2[reorder]+sqrt(v_of_v[reorder])*qnorm(fdr_thresh, lower.tail=FALSE), col="grey80", lwd=2, lty=2)
+		lines(mu_obs[reorder], sigma2[reorder]+sqrt(v_of_v[reorder])*qnorm(fdr_thresh, lower.tail=FALSE), col="grey80", lwd=2, lty=2)
 	}
 	return(tab[tab$q.value < fdr_thresh,])
 }

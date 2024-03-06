@@ -23,7 +23,7 @@ NBumiCoexpression <- function(counts, fit, gene_list=NULL, method=c("both", "on"
 	rownames(pd_gene) <- name_gene
 	lib.size <- fit$vals$tis;
 
-	Z_mat <- matrix(-1, ncol=nrow(pd_gene), nrow=nrow(pd_gene));
+	Z_mat <- matrix(-1, ncol=length(pd_gene), nrow=length(pd_gene));
 	for(i in 1:nrow(pd_gene)) {
 		for (j in (i):nrow(pd_gene)) {
 			p_g1 <- pd_gene[i,];
@@ -31,7 +31,7 @@ NBumiCoexpression <- function(counts, fit, gene_list=NULL, method=c("both", "on"
 			expr_g1 <- counts[rownames(counts)==rownames(pd_gene)[i],]
 			expr_g2 <- counts[rownames(counts)==rownames(pd_gene)[j],]
 	
-			if (method[1] == "off" | method[1]=="both") {
+			if (method == "off" | method=="both") {
 				# Both zero 
 				expect_both_zero <- p_g1*p_g2
 				expect_both_err <- expect_both_zero*(1-expect_both_zero)
@@ -40,7 +40,7 @@ NBumiCoexpression <- function(counts, fit, gene_list=NULL, method=c("both", "on"
 				Z <- (obs_both_zero - sum(expect_both_zero)) / sqrt(sum(expect_both_err))
 				#p_val <- pnorm(-abs(Z))*2
 			}
-			if (method[1] == "on" | method[1]=="both") {
+			if (method == "on" | method=="both") {
 				# both nonzero
 				obs_both_nonzero <- sum(expr_g1!=0 & expr_g2!=0)
 				expect_both_nonzero <- (1-p_g1)*(1-p_g2)
@@ -49,7 +49,7 @@ NBumiCoexpression <- function(counts, fit, gene_list=NULL, method=c("both", "on"
 				#p_val <- pnorm(-abs(Z))*2
 			}
 
-			if (method[1] == "both") {
+			if (method == "both") {
 				# either
 				obs_either <- obs_both_zero+obs_both_nonzero
 				expect_either <- expect_both_zero+expect_both_nonzero

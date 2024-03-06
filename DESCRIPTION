@@ -1,5 +1,5 @@
 Package: M3Drop
-Version: 1.29.0
+Version: 1.29.2
 Date: 2020-09-08
 Title: Michaelis-Menten Modelling of Dropouts in single-cell RNASeq
 Author: Tallulah Andrews <tallulandrews@gmail.com>
@@ -10,7 +10,7 @@ Suggests: ROCR, knitr, M3DExampleData, scater, SingleCellExperiment, monocle, Se
 VignetteBuilder: knitr
 biocViews: RNASeq, Sequencing, Transcriptomics, GeneExpression, Software, DifferentialExpression, DimensionReduction, FeatureExtraction
 Collate: basics.R Plotting_fxns.R Curve_fitting.R Extremes.R Normalization.R Brennecke_implementation.R Threeway_ProportionalArea_VennDiagrams.R Simulations_Functions.R Traditional_DE.R NB_UMI.R M3D_Imputation.R Other_FS_functions.R DANB_HVG.R DANB_Coexpression.R
-Description: This package fits a Michaelis-Menten model to the pattern of dropouts in single-cell RNASeq data. This model is used as a null to identify significantly variable (i.e. differentially expressed) genes for use in downstream analysis, such as clustering cells. 
+Description: This package fits a model to the pattern of dropouts in single-cell RNASeq data. This model is used as a null to identify significantly variable (i.e. differentially expressed) genes for use in downstream analysis, such as clustering cells. Also includes an method for calculating exact Pearson residuals in UMI-tagged data using a library-size aware negative binomial model.
 URL: https://github.com/tallulandrews/M3Drop
 BugReports: https://github.com/tallulandrews/M3Drop/issues
 License: GPL (>=2)

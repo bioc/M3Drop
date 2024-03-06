@@ -25,15 +25,19 @@
 
 		\item{SingleCellExperiment (scater >= 1.6.0)}{uses "counts", if unavailable then "logcounts", which is assumed to be log-normalized.}
 
-		\item{seurat (Seurat)}{uses "raw.data" as counts.}
+		\item{CellDataSet (monocle)}{uses "exprs", specify log/counts using arguments}
 
-		\item{Seurat (Seurat v3)}{uses "obj@assays$RNA@counts" as counts.}
+		\item{ExpressionSet (Biobase)}{uses "exprs", specify log/counts using arguments}
+
+		\item{seurat (Seurat)}{uses "raw.data" as counts.}
 		}
 		Matrix/Dataframe classes :
 		\describe{
 		\item{dgCMatrix (Matrix)}{specify log/counts using arguments}
 
 		\item{data.table (data.table)}{specify log/counts using arguments}
+
+		\item{DataTable (S4Vectors)}{specify log/counts using arguments}
 
 		\item{DataFrame (S4Vectors)}{specify log/counts using arguments}
 
@@ -73,5 +77,10 @@
 	require("SingleCellExperiment")
 	SCE <- SingleCellExperiment(assays=list(counts=counts))
 	input_counts <- NBumiConvertData(SCE)
+
+	# monocle Object
+	require("monocle")
+	obj <- suppressWarnings(newCellDataSet(as.matrix(lognorm)))
+	input_counts <- NBumiConvertData(obj, is.log=TRUE)
 }
 \keyword{normalization}
