@@ -91,7 +91,7 @@ M3DropConvertData <- function(input, is.log=FALSE, is.counts=FALSE, pseudocount=
 }
 
 bg__calc_variables <- function(expr_mat) {
-    if (class(expr_mat) != "matrix" & class(expr_mat) != "dgCMatrix" & class(expr_mat) != "Matrix") {
+    if (class(expr_mat)[1] != "matrix" & class(expr_mat)[1] != "dgCMatrix" & class(expr_mat)[1] != "Matrix") {
 	warning("Warning: not a recognized matrix class, coercing to 'matrix'.")
 	expr_mat <- as.matrix(expr_mat)
     }
