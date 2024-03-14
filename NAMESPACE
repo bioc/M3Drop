@@ -1,6 +1,5 @@
 exportPattern("M3Drop*")
 exportPattern("NBumi*")
-exportPattern("bg__*")
 export(corFS)
 export(giniFS)
 export(irlbaPcaFS)
