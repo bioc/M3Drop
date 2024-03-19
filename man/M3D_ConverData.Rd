@@ -25,8 +25,6 @@
 
 		\item{SingleCellExperiment (scater >= 1.6.0)}{uses "normcounts" if available, then "logcounts", which is assumed to be log-normalized, then "counts"}
 
-		\item{CellDataSet (monocle)}{uses "exprs", specify log/counts using arguments}
-
 		\item{ExpressionSet (Biobase)}{uses "exprs", specify log/counts using arguments}
 
 		\item{seurat (Seurat)}{uses "raw.data" as counts.}
@@ -72,10 +70,5 @@
 	require("SingleCellExperiment")
 	SCE <- SingleCellExperiment(assays=list(counts=counts))
 	expr_mat <- M3DropConvertData(SCE)
-
-	# monocle Object
-	require("monocle")
-	obj <- suppressWarnings(newCellDataSet(as.matrix(lognorm)))
-	expr_mat <- M3DropConvertData(obj, is.log=TRUE)
 }
 \keyword{normalization}

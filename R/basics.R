@@ -42,7 +42,7 @@ M3DropConvertData <- function(input, is.log=FALSE, is.counts=FALSE, pseudocount=
 		} else {
 			stop("Error: Recognized SingleCellExperiment object but cannot find either counts or lognorm expression.")
 		}
-	} else if (type == "CellDataSet" | type == "ExpressionSet") {
+	} else if (type == "ExpressionSet") {
 		# monocle
 		if (is.log) {
 			lognorm <- Biobase::exprs(input)
