@@ -26,9 +26,10 @@ Calculates a unique expectation for each gene expression observation based on th
 }
 \examples{
 	library(M3DExampleData)
-	fit <- NBumiFitModel(Mmus_example_list$data);
-	pearson1 <- NBumiPearsonResiduals(Mmus_example_list$data,fit)
-	pearson2 <- NBumiPearsonResidualsApprox(Mmus_example_list$data,fit)
+	counts <- NBumiConvertData(Mmus_example_list$data)
+	fit <- NBumiFitModel(counts);
+	pearson1 <- NBumiPearsonResiduals(counts,fit)
+	pearson2 <- NBumiPearsonResidualsApprox(counts,fit)
 }
 \keyword{single cell}
 \seealso{NBumiFitModel}
