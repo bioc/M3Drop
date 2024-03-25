@@ -23,12 +23,7 @@ M3DropConvertData <- function(input, is.log=FALSE, is.counts=FALSE, pseudocount=
 	type <- class(input)[1]
 	lognorm <- NULL
 	counts <- NULL
-	if (type == "SCESet") {
-		# Old scater
-		lognorm <- scater::exprs(input)
-		counts <- counts(input)
-
-	} else if (type == "SingleCellExperiment") {
+	if (type == "SingleCellExperiment") {
 		# New scater
 		c <- which(names(assays(input)) == "counts")
 		ln <- which(names(assays(input)) == "logcounts")
