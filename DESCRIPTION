@@ -1,5 +1,5 @@
 Package: M3Drop
-Version: 1.30.0
+Version: 1.31.0
 Date: 2024-03-25
 Title: Michaelis-Menten Modelling of Dropouts in single-cell RNASeq
 Author: Tallulah Andrews <tallulandrews@gmail.com>
